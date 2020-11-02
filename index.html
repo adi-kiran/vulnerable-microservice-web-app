@@ -1,0 +1,37 @@
+<html>
+<head> <h1> <center> Welcome To The Server </center> </h1> </head>
+<body>
+    <script>
+        function signinf()
+        {
+          var xhr = new XMLHttpRequest();
+          var url = 'http://www.localhost:8080/api/ping';
+          ip_addr = document.getElementById("ip").value;
+          params = {"IP":ip_addr}
+          console.log(params);
+          xhr.open('POST', url, false);
+          xhr.setRequestHeader('Content-type', 'application/json');
+          xhr.onreadystatechange = function() 
+          {
+            if(this.readyState == 4 && this.status == 200) 
+            {
+                console.log(this.responseText);
+                document.getElementById("result").innerHTML = this.responseText;
+            }
+            else 
+            {
+                console.log("Error. Please Try again with valid IP")
+                console.log(this.readyState,this.status,this.response)
+            }
+          };
+          xhr.send(JSON.stringify(params));
+        }
+    </script>
+    <center>
+        <h3>Ping : Check the connectivity of our server.</h3>
+        <input type="text" placeholder="Enter IP Address to be pinged" id="ip" required><br><br>
+        <button type="button" onclick="signinf()">Check Connectivity!</button>
+        <div id="result"></div>
+    </center>
+</body>
+</html>
