@@ -1,5 +1,4 @@
 from flask import Flask, render_template,jsonify,request,abort
-# import requests
 import os
 from flask_cors import CORS
 
@@ -13,16 +12,8 @@ def test():
 
 @app.route("/api/ping",methods=["POST"])
 def list_add_user():
-    # with open("abc.txt","w") as f:
-    #     print("hello",file=f)
     if request.method == 'POST':
-        # with open("abc.txt","a") as f:
-        #     print("hello1",file=f)
         IP = request.get_json()["IP"]
-        # with open("abc.txt","w") as f:
-        #     print("hello2",file=f)
-        #     print(IP,file=f)
-        #     print("hello3",file=f)
         cmd = "ping -c 4 "+IP
         stream = os.popen(cmd)
         output = stream.read()
@@ -32,4 +23,4 @@ def list_add_user():
 
 if __name__ == '__main__':
     app.debug = True
-    app.run(port=8080,host='0.0.0.0')
+    app.run(port=8081,host='0.0.0.0')
